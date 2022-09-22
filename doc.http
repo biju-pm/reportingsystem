@@ -1,0 +1,10 @@
+### Registration
+Send Request
+POST http://127.0.0.1:8000/auth/registration/ HTTP/1.1
+Content-Type: application/json
+{
+"username": "test",
+"password1": "test",
+"password2": "test",
+"email": "test@mai.com"
+}
