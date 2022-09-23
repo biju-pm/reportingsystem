@@ -28,10 +28,13 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     'accounts',
+    'applications',
     'clients',
     'core',
     'departments',
+    'servers',
     'web_development',
+    'vendors',
     # 'digital_marketing',
 ]
 

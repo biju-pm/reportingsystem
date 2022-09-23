@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from ...models import HostingCompany, AppPlatform
+from servers.models import HostingCompany, AppPlatform
 
 
 class Command(BaseCommand):
