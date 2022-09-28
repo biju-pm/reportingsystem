@@ -1,7 +1,12 @@
 from rest_framework import generics
 
-from .models import Vendor
-from .serializers import VendorSerializer
+from .models import Vendor, VendorCategory, ApiKeys
+from .serializers import VendorSerializer, VendorCategorySerializer, ApiKeysSerializer
+
+
+class VendorCategoryList(generics.ListCreateAPIView):
+    queryset = VendorCategory.objects.all()
+    serializer_class = VendorCategorySerializer
 
 
 class VendorList(generics.ListCreateAPIView):
@@ -17,3 +22,17 @@ class VendorDetail(generics.RetrieveUpdateDestroyAPIView):
         serializer.save()
 
 
+class ApiKeysList(generics.ListCreateAPIView):
+    queryset = ApiKeys.objects.all()
+    serializer_class = ApiKeysSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+class ApiKeysDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ApiKeys.objects.all()
+    serializer_class = ApiKeysSerializer
+
+    def perform_update(self, serializer):
+        serializer.save()

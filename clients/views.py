@@ -7,7 +7,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
-from .serializers import ClientSerializer, TicketSerializer
+from .serializers import ClientSerializer, TicketSerializer, ClientStaffSerializer
 from .models import Client, Ticket, ClientStaff
 from accounts.serializers import UserSerializer
 
@@ -19,38 +19,38 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+# class ClientViewSet(viewsets.ModelViewSet):
+#     queryset = Client.objects.all()
+#     serializer_class = ClientSerializer
+#
+#     def create(self, request, *args, **kwargs):
+#         serializer = ClientSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+#     def update(self, request, *args, **kwargs):
+#         client = self.get_object()
+#         serializer = ClientSerializer(client, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def create(self, request, *args, **kwargs):
-        serializer = ClientSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, *args, **kwargs):
-        client = self.get_object()
-        serializer = ClientSerializer(client, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ClientView(APIView):
-    def get(self, request, format=None):
-        clients = Client.objects.all()
-        serializer = ClientSerializer(clients, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = ClientSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class ClientView(APIView):
+#     def get(self, request, format=None):
+#         clients = Client.objects.all()
+#         serializer = ClientSerializer(clients, many=True)
+#         return Response(serializer.data)
+#
+#     def post(self, request, format=None):
+#         serializer = ClientSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ClientList(generics.ListAPIView):
@@ -134,6 +134,12 @@ class TicketDetailView(generics.RetrieveUpdateDestroyAPIView):
         return self.destroy(request, *args, **kwargs)
 
 
+class ClientStaffView(generics.ListAPIView):
+    queryset = ClientStaff.objects.all()
+    serializer_class = ClientStaffSerializer
+
+    # def get_queryset(self):
+    #     return ClientStaff.objects.filter(client=self.kwargs['client_id'])
 
 
 

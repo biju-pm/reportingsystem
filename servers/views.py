@@ -12,3 +12,10 @@ class ServerList(ListCreateAPIView):
 class ServerDetail(RetrieveUpdateDestroyAPIView):
     queryset = Server.objects.all()
     serializer_class = ServerSerializer
+
+
+# generate secret key
+
+# python3 -c "import secrets; print(secrets.token_urlsafe())"
+
+

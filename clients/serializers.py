@@ -24,11 +24,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
+    ticket_assigned_to = serializers.StringRelatedField(many=True)
+    ticket_created_by = serializers.StringRelatedField(many=False)
+    ticket_updated_by = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Ticket
         fields = ('id', 'client', 'ticket_number', 'ticket_status', 'ticket_type',
                   'description', 'ticket_priority', 'ticket_assigned_to', 'ticket_created_by',
-                  'ticket_updated_by', 'created_at', 'updated_at')
+                  'ticket_updated_by', 'created_at', 'updated_at', 'time_taken', 'ticket_due_date')
         extra_kwargs = {'ticket_created_by': {'read_only': True}, 'ticket_updated_by': {'read_only': True},
                         'ticket_created_at': {'read_only': True}, 'ticket_updated_at': {'read_only': True}}
 
@@ -39,14 +43,23 @@ class TicketSerializer(serializers.ModelSerializer):
         ticket = super().update(instance, validated_data)
         return ticket
 
+    def get_time_taken(self, obj):
+        return obj.time_taken()
+
 
 class ClientSerializer(serializers.ModelSerializer):
+    department = serializers.StringRelatedField(many=True)
+    user = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Client
-        fields = '__all__'
+        fields =['id', 'user', 'department', 'name', 'phone', 'address', 'city', 'state', 'zipcode']
 
 
 class ClientStaffSerializer(serializers.ModelSerializer):
+    client = serializers.StringRelatedField(many=False)
+    user = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = ClientStaff
-        fields = '__all__'
+        fields = ['id', 'user', 'client', 'first_name', 'last_name', 'phone', 'address', 'city', 'state', 'zipcode']
