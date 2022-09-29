@@ -23,3 +23,4 @@ class ApiKeysSerializer(serializers.ModelSerializer):
     class Meta:
         model = ApiKeys
         fields = ['id', 'vendor', 'api_key', 'api_secret']
+

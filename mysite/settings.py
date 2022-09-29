@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'clients',
     'core',
     'departments',
+    'domains',
     'servers',
     'web_development',
     'vendors',

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from .models import Server, MasterCredentials, SslCertificate, SshCredentials, HostingCompany, AppPlatform
+from .models import MasterCredentials, SslCertificate, SshCredentials, HostingCompany, AppPlatform
+
+from servers.models import Server
 
 
 class MasterCredentialsSerializer(serializers.ModelSerializer):
@@ -48,3 +50,21 @@ class ServerSerializer(serializers.ModelSerializer):
                   'storage', 'disc_utilization', 'os_details', 'public_ip', 'monitoring', 'server_created',
                   'created', 'updated', 'client', 'mastercredentials_set', 'sslcertificate_set', 'sshcredentials_set']
 
+
+# class DnsRecordSerializer(serializers.ModelSerializer):
+#     server = serializers.SlugRelatedField(queryset=Server.objects.all(), slug_field='project_name')
+#
+#     class Meta:
+#         model = DnsRecord
+#         fields = ['id', 'name', 'type', 'value', 'server']
+#
+#
+# class DnsDetailsSerializer(serializers.ModelSerializer):
+#     server = serializers.SlugRelatedField(queryset=Server.objects.all(), slug_field='project_name')
+#     provider = serializers.SlugRelatedField(queryset=Vendor.objects.all(), slug_field='name')
+#     expiry_date = serializers.DateTimeField(format="%d-%m-%Y")
+#     client = serializers.SlugRelatedField(source='server.client', read_only=True, slug_field='name')
+#
+#     class Meta:
+#         model = DnsDetails
+#         fields = ['id', 'name_server', 'server', 'provider', 'expiry_date', 'client']

@@ -18,6 +18,7 @@ class Vendor(models.Model):
     category = models.ForeignKey(VendorCategory, on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
+    is_approved = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

@@ -1,6 +1,7 @@
 from django.db import models
 
 from clients.models import Client
+from vendors.models import Vendor
 
 
 class HostingCompany(models.Model):
@@ -72,6 +73,7 @@ class SslCertificate(models.Model):
     name = models.CharField(verbose_name='Provider Name', max_length=100, blank=True, null=True)
     expiry_date = models.DateTimeField(blank=True, null=True)
     server = models.ForeignKey(Server, on_delete=models.CASCADE)
+    provider = models.ForeignKey(Vendor, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.server.client.name
@@ -94,3 +96,35 @@ class SshCredentials(models.Model):
         verbose_name = 'SSH Credentials'
         verbose_name_plural = 'SSH Credentials'
         ordering = ['server']
+
+
+# class DnsRecord(models.Model):
+#     name = models.CharField(max_length=100, blank=True, null=True)
+#     type = models.CharField(max_length=100, blank=True, null=True)
+#     value = models.CharField(max_length=100, blank=True, null=True)
+#     expiry_date = models.DateTimeField(blank=True, null=True)
+#     server = models.ForeignKey(Server, on_delete=models.CASCADE)
+#     provider = models.ForeignKey(Vendor, on_delete=models.CASCADE, blank=True, null=True)
+#
+#     def __str__(self):
+#         return self.server.client.name
+#
+#     class Meta:
+#         verbose_name = 'DNS Record'
+#         verbose_name_plural = 'DNS Records'
+#         ordering = ['server']
+#
+#
+# class DnsDetails(models.Model):
+#     name_server = models.CharField(max_length=100, blank=True, null=True)
+#     server = models.ForeignKey(Server, on_delete=models.CASCADE)
+#     provider = models.ForeignKey(Vendor, on_delete=models.CASCADE, blank=True, null=True)
+#     expiry_date = models.DateTimeField(blank=True, null=True)
+#
+#     def __str__(self):
+#         return self.name_server
+#
+#     class Meta:
+#         verbose_name = 'DNS Details'
+#         verbose_name_plural = 'DNS Details'
+#         ordering = ['server']
