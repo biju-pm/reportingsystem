@@ -38,17 +38,25 @@ class AppPlatformSerializer(serializers.ModelSerializer):
 
 
 class ServerSerializer(serializers.ModelSerializer):
+    vendor = serializers.StringRelatedField()
+    client = serializers.StringRelatedField()
     mastercredentials_set = MasterCredentialsSerializer(many=True, read_only=True)
     sslcertificate_set = SslCertificateSerializer(many=True, read_only=True)
     sshcredentials_set = SshCredentialsSerializer(many=True, read_only=True)
-    hosting_company = serializers.CharField(source='hosting_company.name')
     app_platform = serializers.CharField(source='app_platform.name')
 
     class Meta:
         model = Server
-        fields = ['hosting_company', 'app_platform', 'location', 'project_name', 'server_size', 'cpu', 'memory',
-                  'storage', 'disc_utilization', 'os_details', 'public_ip', 'monitoring', 'server_created',
-                  'created', 'updated', 'client', 'mastercredentials_set', 'sslcertificate_set', 'sshcredentials_set']
+        fields = ['id', 'vendor', 'client', 'app_platform', 'project_name', 'memory', 'storage', 'os', 'server_type',
+                  'public_ip', 'location', 'monitoring', 'disc_utilization', 'server_created', 'server_status',
+                  'created', 'updated', 'server_charges', 'mastercredentials_set', 'sslcertificate_set',
+                  'sshcredentials_set']
+        extra_kwargs = {
+            'memory': {'source': 'get_memory_display'},
+            'storage': {'source': 'get_storage_display'},
+            'os': {'source': 'get_os_display'},
+            'server_type': {'source': 'get_server_type_display'},
+        }
 
 
 # class DnsRecordSerializer(serializers.ModelSerializer):
