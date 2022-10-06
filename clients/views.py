@@ -96,7 +96,7 @@ class ClientCreateView(generics.CreateAPIView):
     authentication_classes = (TokenAuthentication,)
 
 
-class TicketSerializerView(generics.ListAPIView):
+class TicketListView(generics.ListAPIView):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
 

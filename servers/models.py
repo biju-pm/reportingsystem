@@ -81,13 +81,18 @@ class Server(models.Model):
     server_type = models.CharField(max_length=5, choices=SERVER_TYPE_CHOICES, blank=True, null=True)
     public_ip = models.CharField(max_length=100, blank=True, null=True)
     location = models.CharField(verbose_name='Hosted Region', max_length=100, blank=True, null=True)
-    monitoring = models.BooleanField(verbose_name='Advanced Monitoring?', default=False)
+    w_monitoring = models.BooleanField(verbose_name='Website Monitoring?', default=False)
+    u_monitoring = models.BooleanField(verbose_name='Real User Monitoring?', default=False)
+    p_monitoring = models.BooleanField(verbose_name='Performance Monitoring?', default=False)
+    s_monitoring = models.BooleanField(verbose_name='Security Monitoring?', default=False)
     disc_utilization = models.CharField(max_length=100, blank=True, null=True)
     server_created = models.DateTimeField(blank=True, null=True)
     server_status = models.CharField(max_length=5, choices=SERVER_STATUS_CHOICES, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    server_charges = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    server_charges = models.DecimalField(
+        verbose_name='Server Consumption', max_digits=10, decimal_places=2, blank=True, null=True
+    )
 
     def __str__(self):
         return f'{self.project_name} - {self.client.name}'

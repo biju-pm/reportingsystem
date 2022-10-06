@@ -1,11 +1,9 @@
 from django.urls import path
-from .views import ServerList, ServerDetail
+from .views import ServerList, ServerDetail, ServerCreate, ServerUpdate
 
 urlpatterns = [
     path('servers/api/', ServerList.as_view()),
     path('servers/api/<int:pk>/', ServerDetail.as_view()),
-    # path('dns/api/', DnsRecordList.as_view()),
-    # path('dns/api/<int:pk>/', DnsRecordDetail.as_view()),
-    # path('dnsdetails/api/', DnsDetailsList.as_view()),
-    # path('dnsdetails/api/<int:pk>/', DnsDetailsDetail.as_view()),
+    path('servers/api/create/', ServerCreate.as_view()),
+    path('servers/api/update/<int:pk>/', ServerUpdate.as_view()),
 ]

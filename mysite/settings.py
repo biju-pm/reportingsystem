@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'core',
     'departments',
     'domains',
+    'payments',
     'servers',
     'web_development',
     'vendors',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,3 +127,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     # "http://127.0.0.1:3000",
 ]
+
+ADMIN_EMAIL = 'team@fitup360.com'
