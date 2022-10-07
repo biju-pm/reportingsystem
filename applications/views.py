@@ -12,6 +12,3 @@ class ApplicationList(ListCreateAPIView):
 class ApplicationDetail(RetrieveUpdateDestroyAPIView):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-
-    def perform_update(self, serializer):
-        serializer.save()

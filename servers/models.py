@@ -95,7 +95,7 @@ class Server(models.Model):
     )
 
     def __str__(self):
-        return f'{self.project_name} - {self.client.name}'
+        return f'{self.project_name}'
 
     def save(self, *args, **kwargs):
         if self.storage == 'h-1':

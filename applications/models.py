@@ -1,6 +1,7 @@
 from django.db import models
 
 from servers.models import Server
+from domains.models import Domain, MailServer
 
 
 class AppLanguage(models.Model):
@@ -45,6 +46,8 @@ class Application(models.Model):
     server = models.ForeignKey(Server, on_delete=models.CASCADE, blank=True, null=True)
     application_type = models.ForeignKey(ApplicationType, on_delete=models.CASCADE, blank=True, null=True)
     AppLanguage_language = models.ForeignKey(AppLanguage, on_delete=models.CASCADE, blank=True, null=True)
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE, blank=True, null=True)
+    mail_server = models.ForeignKey(MailServer, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
