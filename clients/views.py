@@ -1,15 +1,16 @@
-from django.utils import timezone
 from django.contrib.auth import get_user_model
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
+from django.utils import timezone
+from rest_framework import generics, status, viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import generics
-from .serializers import ClientSerializer, TicketSerializer, ClientStaffSerializer
-from .models import Client, Ticket, ClientStaff
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from accounts.serializers import UserSerializer
+
+from .models import Client, ClientStaff, Ticket
+from .serializers import (ClientSerializer, ClientStaffSerializer,
+                          TicketSerializer)
 
 User = get_user_model()
 

@@ -4,7 +4,8 @@ from vendors.models import Vendor
 
 
 class DomainSerializer(serializers.ModelSerializer):
-    provider = serializers.SlugRelatedField(queryset=Vendor.objects.all(), slug_field='name')
+    provider = serializers.SlugRelatedField(queryset=Vendor.objects.filter(category__name='Domain Registrar'),
+                                            slug_field='name')
 
     class Meta:
         model = Domain
